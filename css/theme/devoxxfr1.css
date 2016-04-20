@@ -176,8 +176,8 @@ body {
   line-height: 1.3em;
 }
 
-.reveal tt {
-  font-size: 90%;
+.reveal tt, .reveal :not(pre) > code {
+  font-size: 100%;
   color: #42affa;
 }
 
@@ -486,3 +486,46 @@ html.light .footer p {
 }
 
 table.compact { font-size: 90%; }
+
+.reveal .slides section footer {
+  margin-top: 1em;
+  text-align: center;
+  font-size: 0.8em;
+  color: silver;
+}
+
+.reveal .translucent {
+  background: rgba(0, 0, 0, 0.5);
+  /*text-shadow: 2px -2px black, 2px 2px black, -2px 2px black, -2px -2px black;*/
+}
+
+.reveal acronym {
+  cursor: help;
+  border-bottom: 0.05em dotted #444;
+}
+
+.reveal section .breathing { margin: 1em 0; }
+
+b.wrong, b.right {
+  font-weight: normal;
+  padding: 0.1em 0.5em 0.1em 0; border-radius: 0.5em;
+}
+b.wrong:empty, b.right:empty { padding-left: 0.5em; }
+b.wrong { background: #fdd; }
+b.wrong::after {
+  content: " ✖ KO";
+  font-weight: bold;
+  color: #b00;
+}
+
+b.right { background: #dfd; }
+b.right::after {
+  content: " ✔ OK";
+  font-weight: bold;
+  color: #090;
+}
+
+.reveal code u, b.hl {
+  background: #fe9; padding: 0.1em 0.3em; border-radius: 0.5em;
+  text-decoration: none;
+}
