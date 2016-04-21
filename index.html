@@ -151,9 +151,9 @@ const christophe = {
           <ul>
             <li>Les <strong>builders</strong> : Grunt, Gulp, Brunch, Webpack, Browserify, jspm…</li>
             <li>Les <strong>runtimes</strong> : Node, RequireJS</li>
-            <li>Les <strong>frameworks</strong> : Ember, Meteor, Rails, Sails…</li>
-            <li>Les <strong>harnais de tests</strong> : Mocha, Jasmine, AVA, Karma, Jest…</li>
-            <li>Les <strong>EDIs et éditeurs</strong> : WebStorm, VS/VSCode, ST2/3, Atom…</li>
+            <li>Les <strong>frameworks</strong> : Ember, Rails, Sails…</li>
+            <li>Les <strong>harnais de tests</strong> : Mocha, Jasmine, AVA, Karma…</li>
+            <li>Les <strong>EDIs et éditeurs</strong> : WebStorm, VS/VSCode, ST, Atom…</li>
           </ul>
         </section>
 
@@ -177,40 +177,60 @@ const christophe = {
             <h2>Littéraux objets</h2>
 
             <pre><code data-keep-tags="u" class="language-js">
-  function editTodo (id, text) {
-    return { type: types.EDIT_TODO<u>, id, text</u> }
+function editTodo (id, text) {
+  return { type: types.EDIT_TODO<u>, id, text</u> }
+}
+            </code></pre>
+
+            <pre class="fragment"><code data-keep-tags="u" class="language-js">
+function produceFilterTitles (showAll, showActive, showCompleted) {
+  return {
+    <u>[showAll]</u>: 'All',
+    <u>[showActive]</u>: 'Active',
+    <u>[showCompleted]</u>: 'Completed'
   }
+}
+            </code></pre>
+            <footer><a href="http://babeljs.io/docs/learn-es2015/#enhanced-object-literals">Détails</a></footer>
+          </section>
+
+          <section id="object-literals-irl">
+            <h2 data-irl>Littéraux objets</h2>
+
+            <pre><code data-keep-tags="u" class="language-js">
+res.render('entries/index', {
+  pageTitle: 'Les bookmarks', <u>entries, entryCount, tags</u>
+})
             </code></pre>
 
             <pre><code data-keep-tags="u" class="language-js">
-  function produceFilterTitles (showAll, showActive, showCompleted) {
-    return {
-      <u>[showAll]</u>: 'All',
-      <u>[showActive]</u>: 'Active',
-      <u>[showCompleted]</u>: 'Completed'
-    }
-  }
+const coreReducer = combineReducers({
+  <u>currentUser, goals, history, today, todaysProgress</u>
+})
             </code></pre>
-            <footer><a href="http://babeljs.io/docs/learn-es2015/#enhanced-object-literals">Détails</a></footer>
+
+            <pre><code data-keep-tags="u" class="language-js">
+return { <u>[action.goalId]</u>: previous + increment }
+            </code></pre>
           </section>
 
           <section id="classes">
             <h2>Classes</h2>
 
             <pre><code data-keep-tags="u" class="language-js">
-  <u>class</u> TodoItem <u>extends</u> Component {
-    <u>constructor</u> (props, context) {
-      <u>super</u>(props, context)
-      this.state = {
-        editing: false
-      }
+<u>class</u> TodoItem <u>extends</u> Component {
+  <u>constructor</u> (props, context) {
+    <u>super</u>(props, context)
+    this.state = {
+      editing: false
     }
-
-    <u>handleDoubleClick ()</u> {
-      this.setState({ editing: true })
-    }
-    …
   }
+
+  <u>handleDoubleClick ()</u> {
+    this.setState({ editing: true })
+  }
+  …
+}
             </code></pre>
             <footer>
               <a href="http://babeljs.io/docs/learn-es2015/#classes">Détails</a>
@@ -223,22 +243,22 @@ const christophe = {
             <h2>Classes (suite)</h2>
 
             <pre><code data-keep-tags="u" class="language-js">
-  class TodoItem extends Component {
-    <u>static</u> MINIMUM_COMPLETION_TIME = 5;
+class TodoItem extends Component {
+  <u>static</u> MINIMUM_COMPLETION_TIME = 5;
 
-    <u>get</u> completionTime () {
-      return (this.checkedAt - this.startedAt) / 1000
-    }
-
-    <u>set</u> completionTime (value) {
-      this.checkedAt = this.startedAt + Math.max(value, MINIMUM_COMPLETION_TIME) * 1000
-    }
-
-    cleanUp () {
-      <u>super.</u>cleanUp()
-      this.customState = null
-    }
+  <u>get</u> completionTime () {
+    return (this.checkedAt - this.startedAt) / 1000
   }
+
+  <u>set</u> completionTime (value) {
+    this.checkedAt = this.startedAt + Math.max(value, MINIMUM_COMPLETION_TIME) * 1000
+  }
+
+  cleanUp () {
+    <u>super.</u>cleanUp()
+    this.customState = null
+  }
+}
             </code></pre>
           </section>
         </section>
@@ -253,55 +273,81 @@ const christophe = {
             <h2>Déstructuration</h2>
 
             <pre><code data-keep-tags="u" class="language-js">
-  const <u>{ activeCount } =</u> this.props
-  …
-  const { filter<u>: selectedFilter</u>, onShow } = this.props
+const <u>{ activeCount } =</u> this.props
+…
+const { filter<u>: selectedFilter</u>, onShow } = this.props
             </code></pre>
 
             <pre><code data-keep-tags="u" class="language-js">
-  const <u>[, filters] =</u> output.props.children
-  …
-  const <u>[,, clear] =</u> output.props.children
+var { op: a, lhs<u>: { op: b }</u>, rhs: c } = getASTNode()
             </code></pre>
 
-            <pre><code data-keep-tags="u" class="language-js">
-  var { op: a, lhs<u>: { op: b }</u>, rhs: c } = getASTNode()
-            </code></pre>
-
-            <pre><code data-keep-tags="u" class="language-js">
-  function convertNode (<u>{ nodeType, nodeValue }</u>) {
-    switch (nodeType) {
-      case ELEMENT_NODE:
-        convertElementNode(nodeValue)
-        break
-      // …
-    }
+            <pre class="fragment"><code data-keep-tags="u" class="language-js">
+function convertNode (<u>{ nodeType, nodeValue }</u>) {
+  switch (nodeType) {
+    case ELEMENT_NODE:
+      convertElementNode(nodeValue)
+      break
+    // …
   }
+}
+            </code></pre>
+
+            <pre class="fragment"><code data-keep-tags="u" class="language-js">
+const <u>[, filters] =</u> output.props.children
+…
+const <u>[,, clear] =</u> output.props.children
             </code></pre>
 
             <footer><a href="http://babeljs.io/docs/learn-es2015/#destructuring">Détails</a></footer>
+          </section>
+
+          <section id="destructuring-irl">
+            <h2 data-irl>Déstructuration</h2>
+
+            <pre data-keep-tags="u"><code class="language-js">
+const <u>[
+  endpoint = '/users/me',
+  output = 'response.json'
+]</u> = process.argv.slice(2)
+            </code></pre>
+
+            <pre data-keep-tags="u"><code class="language-js">
+const HistoryDayGoal = (<u>{ goal: { name, units }, stats: [progress, target] }</u>) => {
+  // …
+}
+            </code></pre>
+
+            <pre data-keep-tags="u"><code class="language-js">
+Promise.all([
+  Entry.tags(), Entry.count().exec(), Entry.getEntries(req.query)
+])
+.then((<u>[tags, entryCount, entries]</u>) => {
+  res.render('entries/index', { pageTitle: 'Les bookmarks', entries, entryCount, tags })
+})
+              </code></pre>
           </section>
 
           <section id="rest-spread">
             <h2>Rest &amp; Spread (itérables)</h2>
 
             <pre><code data-keep-tags="u" class="language-js">
-  function winners(first, runnerUp, <u>...others</u>) {
-    console.log(first, runnerUp, others)
-  }
-  winners('alice', 'bob', 'claire', 'david')
-  // => 'alice', 'bob', <u>['claire', 'david']</u>
+function winners (first, runnerUp, <u>...others</u>) {
+  console.log(first, runnerUp, others)
+}
+winners('alice', 'bob', 'claire', 'david')
+// => 'alice', 'bob', <u>['claire', 'david']</u>
 
-  var arr1 = ['one', 'two']
-  var arr2 = ['three', 'four']
-  arr1.push(<u>...arr2</u>) // => 4
-  arr1 // => ['one', 'two', 'three', 'four']
+var arr1 = ['one', 'two']
+var arr2 = ['three', 'four']
+arr1.push(<u>...arr2</u>) // => 4
+arr1 // => ['one', 'two', 'three', 'four']
 
-  var nodeListAsArray = <u>[...</u>document.querySelectorAll('h1')<u>]</u>
+var nodeListAsArray = <u>[...</u>document.querySelectorAll('h1')<u>]</u>
             </code></pre>
 
             <pre><code data-keep-tags="u" class="language-js">
-  return <u>[</u>{ id: …, completed: …, text: … }<u>, ...state]</u>
+return <u>[</u>{ id: …, completed: …, text: … }<u>, ...state]</u>
             </code></pre>
 
             <footer>
@@ -313,14 +359,14 @@ const christophe = {
             <h2>Rest &amp; Spread (objets)</h2>
 
             <pre><code data-keep-tags="u" class="language-js">
-  var defaults = { first: 'John', last: 'Doe', age: 42 }
-  var trainer = { last: 'Smith', age: 35 }
-  trainer = { <u>...defaults</u>, <u>...trainer</u>, age: 36 }
-  // => { first: 'John', last: 'Smith', age: 36 }
+var defaults = { first: 'John', last: 'Doe', age: 42 }
+var trainer = { last: 'Smith', age: 35 }
+trainer = { <u>...defaults</u>, <u>...trainer</u>, age: 36 }
+// => { first: 'John', last: 'Smith', age: 36 }
             </code></pre>
 
             <pre><code data-keep-tags="u" class="language-jsx">
-  &lt;TodoItem key={todo.id} todo={todo} {<u>...actions</u>} /&gt;
+&lt;TodoItem key={todo.id} todo={todo} {<u>...actions</u>} /&gt;
             </code></pre>
 
             <footer>
@@ -330,44 +376,83 @@ const christophe = {
             </footer>
           </section>
 
+          <section id="rest-spread-irl">
+            <h2 data-irl>Rest &amp; Spread</h2>
+
+            <pre><code data-keep-tags="u" class="language-js">
+componentWillReceiveProps ({ goal }) {
+  this.setState({ <u>...</u>DEFAULT_STATE, <u>...</u>goal })
+}
+            </code></pre>
+
+            <pre><code data-keep-tags="u" class="language-js">
+case ADD_GOAL: {
+  const { name, target, units } = action
+  const id = Math.max(<u>...</u>state.map((goal) => goal.id), -1) + 1
+  return [<u>...</u>state, { id, name, target, units }]
+}
+            </code></pre>
+          </section>
+
           <section id="defaults">
             <h2>Valeurs par défaut</h2>
 
             <pre><code data-keep-tags="u" class="language-js">
-  function todos (state<u> = initialState</u>, action) {
-    // …
-  }
+function todos (state<u> = initialState</u>, action) {
+  // …
+}
 
-  function convertNode ({ nodeType <u>= ELEMENT_NODE</u>, nodeValue }) {
-    // …
-  }
+function convertNode ({ nodeType <u>= ELEMENT_NODE</u>, nodeValue }) {
+  // …
+}
             </code></pre>
 
             <pre><code data-keep-tags="u" class="language-js">
-  var [first, second<u> = 'foo'</u>] = ['yo']
-  // second === 'foo'
+var [first, second<u> = 'foo'</u>] = ['yo']
+// second === 'foo'
 
-  var person = { first: 'Louis', sex: 'M', age: 36 }
-  var { first, last<u> = 'Doe'</u>, age<u> = 42</u> } = person
-  // first === 'Louis', last === 'Doe', age === 36
+var person = { first: 'Louis', sex: 'M', age: 36 }
+var { first, last<u> = 'Doe'</u>, age<u> = 42</u> } = person
+// first === 'Louis', last === 'Doe', age === 36
             </code></pre>
             <footer><a href="http://babeljs.io/docs/learn-es2015/#default-rest-spread">Détails</a></footer>
+          </section>
+
+          <section id="defaults-irl">
+            <h2 data-irl>Valeurs par défaut</h2>
+
+            <pre><code data-keep-tags="u" class="language-js">
+export default function goals (<u>state = []</u>, action) {
+            </code></pre>
+
+            <pre><code data-keep-tags="u" class="language-js">
+function goalTrackerReducer (<u>state = coreReducer(undefined, {})</u>, action) {
+            </code></pre>
+
+            <pre><code data-keep-tags="u" class="language-js">
+export default function today (<u>state = moment().format('YYYY-MM-DD')</u>, action) {
+            </code></pre>
+
+            <pre><code data-keep-tags="u" class="language-js">
+const DeleteSettingDialog = ({ <u>goal = {}</u>, onCancel, onDelete, open }) => {
+            </code></pre>
+
           </section>
 
           <section id="template-strings">
             <h2>Template strings</h2>
 
             <pre><code data-keep-tags="u" class="language-js">
-  var person = { first: 'Thomas', last: 'Anderson', age: 25, nickname: 'Neo' }
+var person = { first: 'Thomas', last: 'Anderson', age: 25, nickname: 'Neo' }
 
-  // Interpolation de JS quelconque
-  console.log(`<u>${person.first}</u> aka <u>${person.nickname}</u>`)
-  // => 'Thomas aka Neo'
+// Interpolation de JS quelconque
+console.log(`<u>${person.first}</u> aka <u>${person.nickname}</u>`)
+// => 'Thomas aka Neo'
 
-  // Multi-ligne !
-  var markup = <u>`</u>&lt;li&gt;
-    ${person.first} ${person.last}, age ${person.age}
-  &lt;/li&gt;<u>`</u>
+// Multi-ligne !
+var markup = <u>`</u>&lt;li&gt;
+  ${person.first} ${person.last}, age ${person.age}
+&lt;/li&gt;<u>`</u>
             </code></pre>
 
             <footer><a href="http://babeljs.io/docs/learn-es2015/#template-strings">Détails</a></footer>
@@ -377,23 +462,23 @@ const christophe = {
             <h2><code>let</code> &amp; <code>const</code></h2>
 
             <pre><code data-keep-tags="u" class="language-js">
-  <u>const</u> { activeCount } = this.props
-  …
-  <u>const</u> { filter: selectedFilter, onShow } = this.props
+<u>const</u> { activeCount } = this.props
+…
+<u>const</u> { filter: selectedFilter, onShow } = this.props
             </code></pre>
 
             <pre><code data-keep-tags="u" class="language-js">
-  <u>const</u> ADD_TODO = 'ADD_TODO'
-  <u>const</u> DELETE_TODO = 'DELETE_TODO'
-  <u>const</u> EDIT_TODO = 'EDIT_TODO'
+<u>const</u> ADD_TODO = 'ADD_TODO'
+<u>const</u> DELETE_TODO = 'DELETE_TODO'
+<u>const</u> EDIT_TODO = 'EDIT_TODO'
             </code></pre>
 
             <p>Portée : le bloc (même implicite)</p>
 
             <pre><code data-keep-tags="u" class="language-js">
-  for (<u>let</u> index = 0; index &lt; 10; ++index)
-    setTimeout(() => console.log(index), 10)
-    // => Effectivement de 0 à 9, pas 10 x 10, malgré l’asynchrone
+for (<u>let</u> index = 0; index &lt; 10; ++index)
+  setTimeout(() => console.log(index), 10)
+  // => Effectivement de 0 à 9, pas 10 x 10, malgré l’asynchrone
             </code></pre>
 
             <p><q>“<code>const</code> is the new <code>var</code>”</q>.  <code>let</code> seulement si besoin.</p>
@@ -407,11 +492,11 @@ const christophe = {
             <p>Attention ! <code>const</code> n’est pas récursif / profond !</p>
 
             <pre><code class="language-js">
-  const author = { name: 'Bob', language: 'js' }
-  author.language = 'es6'
+const author = { name: 'Bob', language: 'js' }
+author.language = 'es6'
 
-  const days = ['tuesday', 'wednesday', 'thursday']
-  days.push('friday')
+const days = ['tuesday', 'wednesday', 'thursday']
+days.push('friday')
             </code></pre>
 
             <p>Pour geler en profondeur, voir <a href="https://github.com/substack/deep-freeze">deep-freeze</a>.</p>
@@ -425,20 +510,20 @@ const christophe = {
             <p>Octaux et binaires (<code>052</code> ne marche plus en strict)</p>
 
             <pre><code data-keep-tags="u" class="language-js">
-  <u>0o</u>52     // => 42
-  <u>0b</u>101010 // => 42
+<u>0o</u>52     // => 42
+<u>0b</u>101010 // => 42
             </code></pre>
 
             <p>Encore plus d’Unicode</p>
 
             <pre><code class="language-js">
-  "𠮷".length == 2                      // Nombre de caractères, pas de codepoints
+"𠮷".length == 2                      // Nombre de caractères, pas de codepoints
 
-  "\u{20BB7}" == "𠮷" == "\uD842\uDFB7" // Nouvelle syntaxe d’échappement pour codepoint
+"\u{20BB7}" == "𠮷" == "\uD842\uDFB7" // Nouvelle syntaxe d’échappement pour codepoint
 
-  "𠮷".match(/./u)[0].length == 2       // Nouveau flag 'u' des regexp, change les classes
+"𠮷".match(/./u)[0].length == 2       // Nouveau flag 'u' des regexp, change les classes
 
-  "𠮷".codePointAt(0) == 0x20BB7        // Nouvelle API codePointAt (en plus de charCodeAt)
+"𠮷".codePointAt(0) == 0x20BB7        // Nouvelle API codePointAt (en plus de charCodeAt)
             </code></pre>
 
             <footer>
@@ -454,21 +539,21 @@ const christophe = {
             <p>Ne redéfinit pas <code>this</code>*, qui reste donc lexical !</p>
 
             <pre><code data-keep-tags="u" class="language-jsx">
-  &lt;TodoTextInput text={todo.text}
-   editing={this.state.editing}
-   onSave={<u>(text) => this.handleSave(todo.id, text)</u>} />
+&lt;TodoTextInput text={todo.text}
+ editing={this.state.editing}
+ onSave={<u>(text) => this.handleSave(todo.id, text)</u>} />
             </code></pre>
 
             <p>Raccourcis possibles, idéal pour les prédicats et filtres…</p>
 
             <pre><code data-keep-tags="u" class="language-js">
-  TODO_FILTERS = {
-    [showAll]: <u>() => true</u>,
-    [showActive]: <u>(todo) => !todo.completed</u>,
-    [showCompleted]: <u>(todo) => todo.completed</u>
-  }
-  …
-  atLeastOneCompleted = this.props.todos.some(<u>(todo) => todo.completed</u>)
+TODO_FILTERS = {
+  [showAll]: <u>() => true</u>,
+  [showActive]: <u>(todo) => !todo.completed</u>,
+  [showCompleted]: <u>(todo) => todo.completed</u>
+}
+…
+atLeastOneCompleted = this.props.todos.some(<u>(todo) => todo.completed</u>)
             </code></pre>
 
             <footer>
@@ -476,6 +561,32 @@ const christophe = {
               •
               <a href="http://babeljs.io/docs/learn-es2015/#arrows-and-lexical-this">Détails</a>
             </footer>
+          </section>
+
+          <section id="arrow-functions-irl">
+            <h2 data-irl>Fonctions fléchées</h2>
+
+            <pre data-keep-tags="u"><code class="language-js">
+[12, 18, 21, 23].map(<u>(hour) => [hour, 0, 0]</u>)
+            </code></pre>
+
+            <pre data-keep-tags="u"><code class="language-js">
+return state.map(<u>(goal) => goal.id === newGoal.id ? newGoal : goal</u>)
+            </code></pre>
+
+            <pre data-keep-tags="u"><code class="language-jsx">
+{goals.map(<u>(goal) =></u>
+  &lt;GoalSetting key={goal.id} goal={goal}
+    onDeleteClick={<u>() => this.openGoalDeleter(goal)</u>}
+    onEditClick={<u>() => this.openGoalEditor(goal)</u>}
+  />
+)}
+            </code></pre>
+
+            <pre data-keep-tags="u"><code class="language-jsx">
+const mapStateToProps = <u>({ goals, currentUser }) => ({ goals, currentUser })</u>
+            </code></pre>
+
           </section>
         </section>
 
@@ -497,33 +608,33 @@ const christophe = {
                 <tr>
                   <td>
                     <pre><code data-keep-tags="u" class="language-js">
-  // Exports explicites, nommés, à la volée
-  <u>export</u> function addTodo(text) {
-    return { type: types.ADD_TODO, text }
-  }
+// Exports explicites, nommés, à la volée
+<u>export</u> function addTodo (text) {
+  return { type: types.ADD_TODO, text }
+}
 
-  <u>export</u> const ADD_TODO = 'ADD_TODO'
+<u>export</u> const ADD_TODO = 'ADD_TODO'
 
-  // Export par défaut (un seul par module)
-  <u>export default</u> Footer
+// Export par défaut (un seul par module)
+<u>export default</u> Footer
 
-  // Exports a posteriori
-  export { Component, Factory, makeHigherOrder }
+// Exports a posteriori
+export { Component, Factory, makeHigherOrder }
                     </code></pre>
                   </td>
                   <td>
                     <pre><code data-keep-tags="u" class="language-js">
-  // Export renommé
-  export { each <u>as</u> forEach }
+// Export renommé
+export { each <u>as</u> forEach }
 
-  // Ré-export (délégation)
-  export * from './lib/cool-module'
+// Ré-export (délégation)
+export * from './lib/cool-module'
 
-  // ou, plus ciblé :
-  export {
-    makeHigherOrder as wrap,
-    Component
-  } from 'toolkit'
+// ou, plus ciblé :
+export {
+  makeHigherOrder as wrap,
+  Component
+} from 'toolkit'
                     </code></pre>
                   </td>
                 </tr>
@@ -535,18 +646,18 @@ const christophe = {
             <h2>Importer</h2>
 
             <pre><code data-keep-tags="u" class="language-js">
-  // Import intégral dans un « namespace »
-  import <u>* as types</u> from '../constants/ActionTypes'
+// Import intégral dans un « namespace »
+import <u>* as types</u> from '../constants/ActionTypes'
 
-  // Import nommé de l’export par défaut, imports homonymes d’exports nommés
-  import <u>React, { PropTypes, Component }</u> from 'react'
+// Import nommé de l’export par défaut, imports homonymes d’exports nommés
+import <u>React, { PropTypes, Component }</u> from 'react'
 
-  // Ou juste un des deux modes :
-  import <u>classnames</u> from 'classnames'
-  import <u>{ SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE }</u> from '../constants/TodoFilters'
+// Ou juste un des deux modes :
+import <u>classnames</u> from 'classnames'
+import <u>{ SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE }</u> from '../constants/TodoFilters'
 
-  // Import renommé
-  import { makeHigherOrder <u>as</u> wrap } from 'toolkit'
+// Import renommé
+import { makeHigherOrder <u>as</u> wrap } from 'toolkit'
             </code></pre>
 
             <footer>
@@ -561,14 +672,14 @@ const christophe = {
             <p>Une API de chargement asynchrone quand on a besoin</p>
 
             <pre><code class="language-js">
-  System.import('toolkit')
-    .then(toolkit => …)
-    .catch(error => …)
-
-  // Plusieurs ? Combinaison de promesses !
-  Promise.all(['toolkit', 'security', 'advanced'].map(System.import))
-  .then(([toolkit, security, advanced]) => …)
+System.import('toolkit')
+  .then(toolkit => …)
   .catch(error => …)
+
+// Plusieurs ? Combinaison de promesses !
+Promise.all(['toolkit', 'security', 'advanced'].map(System.import))
+.then(([toolkit, security, advanced]) => …)
+.catch(error => …)
             </code></pre>
           </section>
         </section>
@@ -585,19 +696,19 @@ const christophe = {
             <p>Un premier gros exemple…</p>
 
             <pre><code data-keep-tags="u" class="language-js">
-  caches.match('/data.json')<u>.then</u>(function (response) {
-    if (!response) <u>throw</u> Error('No data')
-    <u>return</u> response.json()
-  })<u>.then</u>(function (data) {
-    // don't overwrite newer network data
-    if (!networkDataReceived) {
-      updatePage(data)
-    }
-  })<u>.catch</u>(function () {
-    // we didn't get cached data, the network is our last hope:
-    <u>return</u> networkUpdate
-  })<u>.catch</u>(showErrorMessage)
-  <u>.then</u>(stopSpinner)
+caches.match('/data.json')<u>.then</u>(function (response) {
+  if (!response) <u>throw</u> Error('No data')
+  <u>return</u> response.json()
+})<u>.then</u>(function (data) {
+  // don't overwrite newer network data
+  if (!networkDataReceived) {
+    updatePage(data)
+  }
+})<u>.catch</u>(function () {
+  // we didn't get cached data, the network is our last hope:
+  <u>return</u> networkUpdate
+})<u>.catch</u>(showErrorMessage)
+<u>.then</u>(stopSpinner)
             </code></pre>
           </section>
 
@@ -613,7 +724,7 @@ const christophe = {
             <h3 class="breathing">Largement répandu</h3>
 
             <p>
-              Plein de libs pré-ES6, jqXHR, APIs web récentes…<br/>
+              Plein de libs pré-ES6, jqXHR, APIs web récentes…  Et discussion Node.<br/>
               <small>(ServiceWorker, Fetch, Streams, Push, Notification, Battery, etc.)</small>
             </p>
           </section>
@@ -640,15 +751,15 @@ const christophe = {
             <p>Code asynchrone, non bloquant, mais qui a « l’air synchrone ».</p>
 
            <pre><code data-keep-tags="u" class="language-js">
-  <u>async</u> function processUserNotebook (request, response) {
-    try {
-      const user = <u>await</u> User.get(request.user)
-      const notebook = <u>await</u> Notebook.get(user.notebook)
-      response.send(<u>await</u> doSomethingAsync(user, notebook))
-    } catch (err) {
-      response.send(err)
-    }
+<u>async</u> function processUserNotebook (request, response) {
+  try {
+    const user = <u>await</u> User.get(request.user)
+    const notebook = <u>await</u> Notebook.get(user.notebook)
+    response.send(<u>await</u> doSomethingAsync(user, notebook))
+  } catch (err) {
+    response.send(err)
   }
+}
             </code></pre>
           </section>
 
@@ -660,34 +771,34 @@ const christophe = {
             <p>Et on récupère aussi le <code>try</code>/<code>catch</code> !</p>
 
             <pre><code data-keep-tags="u" class="language-js">
-  <u>async</u> function chainAnimationsAsync (elem, animations) {
-    let ret = null
-    try {
-      for (const anim of animations) {
-        ret = <u>await</u> anim(elem)
-      }
-    } catch (e) { /* ignore and keep going */ }
-    return ret
-  }
+<u>async</u> function chainAnimationsAsync (elem, animations) {
+  let ret = null
+  try {
+    for (const anim of animations) {
+      ret = <u>await</u> anim(elem)
+    }
+  } catch (e) { /* ignore and keep going */ }
+  return ret
+}
             </code></pre>
           </section>
 
-          <section id="async-functions-2">
+          <section id="async-functions-3">
             <h2><code>async</code> / <code>await</code></h2>
 
-            <p>Attention toutefois à ne pas recréer les bêtises du monde synchrone et bloquant, en sériant à tort ce qui peut être parallélisé :</p>
+            <p>Attention toutefois à ne pas recréer le monde synchrone et bloquant, en sériant à tort ce qui peut être parallélisé.  Pensez aux primitives de promesses, telles <code>all</code> et <code>race</code> :</p>
 
            <pre><code data-keep-tags="u" class="language-js">
-  <u>async</u> function listEntries (request, response) {
-    try {
-      const [entryCount, entries, tags] = <u>await</u> Promise.all([
-        Entry.count().exec(), Entry.getEntries(request.query), Entry.tags()
-      ])
-      response.render('entries/index', { entryCount, entries, tags })
-    } catch (err) {
-      response.send(err)
-    }
+<u>async</u> function listEntries (request, response) {
+  try {
+    const [entryCount, entries, tags] = <u>await Promise.all([</u>
+      Entry.count().exec(), Entry.getEntries(request.query), Entry.tags()
+    <u>])</u>
+    response.render('entries/index', { entryCount, entries, tags })
+  } catch (err) {
+    response.send(err)
   }
+}
             </code></pre>
 
             <footer>
@@ -701,6 +812,7 @@ const christophe = {
         <section>
           <section id="metaprogramming">
             <h1>Métaprogrammation</h1>
+            <h3 lang="en">I see what you did there</h3>
           </section>
 
           <section id="proxies">
@@ -731,14 +843,14 @@ const christophe = {
             <p>On définit des <span lang="en">traps</span> pour chaque type de manipulation. L’API <code>Reflect</code> nous fournit l’implémentation par défaut</p>
 
             <pre data-keep-tags="u"><code class="language-js">
-function proxify(obj) {
-  return new Proxy(obj, {
-    get (target, property, receiver) {
+function wrapAsDefensive (obj) {
+  return <u>new Proxy(obj, {</u>
+    <u>get (target, property, receiver)</u> {
       if (!(property in target)) {
         throw new ReferenceError(`Property ${property} missing in ${JSON.stringify(target)}`)
       }
 
-      return Reflect.get(target, property, receiver)
+      return <u>Reflect.get(target, property, receiver)</u>
     }
   })
 }
@@ -752,12 +864,14 @@ function proxify(obj) {
 
             <pre><code data-keep-tags="u" class="language-js">
   <u>@autobind</u>
-  class Meal {
-    <u>@readonly</u>
-    entree = 'Steak'
+  class TodoItem extends Component {
+    <u>@memoize('5min')</u>
+    getOverallCounts () {
+      // …
+    }
 
-    <u>@memoized</u>
-    fullRun() {
+    <u>@override</u>
+    render () {
       // …
     }
   }

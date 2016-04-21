@@ -455,7 +455,7 @@ html.light .footer p {
   color: #999;
 }
 
-.reveal p[lang="en"], .reveal span[lang="en"] {
+.reveal p[lang="en"], .reveal span[lang="en"], .reveal h3[lang="en"] {
   font-style: italic;
 }
 
@@ -495,7 +495,7 @@ table.compact { font-size: 90%; }
 }
 
 .reveal .translucent {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
   /*text-shadow: 2px -2px black, 2px 2px black, -2px 2px black, -2px -2px black;*/
 }
 
@@ -528,4 +528,17 @@ b.right::after {
 .reveal code u, b.hl {
   background: #fe9; padding: 0.1em 0.3em; border-radius: 0.5em;
   text-decoration: none;
+}
+
+h2[data-irl]::after {
+  position: absolute;
+  right: 0;
+  top: 0;
+  content: 'IRL';
+  color: black;
+  font-size: 80%;
+  background-color: #b10142;
+  color: white;
+  padding: 0.1em 0.2em;
+  transform: rotate(-30deg);
 }
